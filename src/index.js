@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, FlatList } from 'react-native';
+import { connect } from 'react-redux'
 import ListItem from './components/ListItem'
 
 const styles = StyleSheet.create({
@@ -15,12 +16,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const data = [
-  { id: 1, desc: 'texto prueba', completed: false},
-  { id: 2, desc: 'texto prueba 2', completed: false},
-]
-
-export default () => {
+const App = ({ data }) => {
   return (
     <View style={styles.container}>
       <FlatList 
@@ -32,4 +28,14 @@ export default () => {
     </View>
   )
 }
+
+// funcion que recibetodo el estado de la aplicacion
+// retorna los valores que quieremos que aparezcan en los props del componente
+const mapStateToProps = state => {
+  return {data: state.todos}
+}
+
+// primera vez que llamamos a connect le pasamos mapStateToProps
+// la segunda vez que la llamamos le pasamos el componente que queremos conectar
+export default connect(mapStateToProps)(App)
 
