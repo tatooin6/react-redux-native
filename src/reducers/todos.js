@@ -4,7 +4,20 @@ const initialState = [
   { id: 3, desc: 'todo 3', completed: false },
 ]
 
+const COMPLETE = 'COMPLETE'
+
+export const complete = id => ({
+  type: COMPLETE,
+  payload: id,
+})
+
 export default (state = initialState, action) => {
-  console.log(action)
-  return state
+  switch (action.type) {
+    case COMPLETE: 
+      return state.map(x => x.id === action.payload ? ({ ...x, completed: !x.completed }): x)
+      break;
+    
+    default:
+      return state
+  }
 }
