@@ -1,12 +1,13 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { StyleSheet, View, FlatList } from 'react-native';
 import { connect } from 'react-redux'
 import ListItem from './components/ListItem'
-import { complete } from './reducers/todos'
+import Input from './components/Input'
+import { complete, submit } from './reducers/todos'
 
 const styles = StyleSheet.create({
   container: {
-    margin: 25,
+    marginTop: 35,
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'flex-start',
@@ -17,9 +18,18 @@ const styles = StyleSheet.create({
   }
 });
 
-const App = ({ data, complete }) => {
+// este submit es el que viene del mapDispatchToProps
+const App = ({ data, complete, submit }) => {
+  const [value, setValue] = useState('')
+
+  const handleChange = (val) => {
+    console.log(val)
+    setValue(val)
+  }
+
   return (
     <View style={styles.container}>
+      <Input onChange={handleChange} value={value}/> 
       <FlatList 
         style={styles.list}
         data={data}
@@ -45,7 +55,8 @@ const mapStateToProps = state => {
 // objeto contiene las propiedades que se quiere en el componente de App
 // este objeto se lo manda con sus argumentos al componente
 const mapDispatchToProps = dispatch => ({
-  complete: (id) => dispatch(complete(id)) // complete es un action Creator
+  complete: (id) => dispatch(complete(id)), // complete es un action Creator
+  submit: (val) => dispatch(submit(val)),
 })
 
 // primera vez que llamamos a connect le pasamos mapStateToProps
