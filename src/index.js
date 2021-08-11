@@ -23,13 +23,17 @@ const App = ({ data, complete, submit }) => {
   const [value, setValue] = useState('')
 
   const handleChange = (val) => {
-    console.log(val)
     setValue(val)
+  }
+
+  const handleSubmit = () => {
+    submit(value)
+    setValue('')
   }
 
   return (
     <View style={styles.container}>
-      <Input onChange={handleChange} value={value}/> 
+      <Input onSubmit={() => handleSubmit()} onChange={handleChange} value={value}/> 
       <FlatList 
         style={styles.list}
         data={data}
