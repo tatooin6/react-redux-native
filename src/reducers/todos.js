@@ -11,6 +11,7 @@ export const complete = id => ({
   payload: id,
 })
 
+// Para actualizar el estado de la aplicacion
 export default (state = initialState, action) => {
   switch (action.type) {
     case COMPLETE: 

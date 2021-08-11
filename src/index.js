@@ -6,7 +6,7 @@ import { complete } from './reducers/todos'
 
 const styles = StyleSheet.create({
   container: {
-    margin: 15,
+    margin: 25,
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'flex-start',
@@ -25,7 +25,12 @@ const App = ({ data, complete }) => {
         data={data}
         keyExtractor={x => String(x.id)}
         renderItem={({ item }) => 
-          <ListItem completed={item.completed} onPress={ () =>complete(item.id) } desc={item.desc} />}
+          <ListItem 
+            completed={item.completed} 
+            onPress={ () =>complete(item.id) } 
+            desc={item.desc} 
+          />
+        }
       />
     </View>
   )
@@ -38,6 +43,7 @@ const mapStateToProps = state => {
 }
 
 // objeto contiene las propiedades que se quiere en el componente de App
+// este objeto se lo manda con sus argumentos al componente
 const mapDispatchToProps = dispatch => ({
   complete: (id) => dispatch(complete(id)) // complete es un action Creator
 })
